@@ -27,8 +27,13 @@ func _try_load_sprite() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	# Stand still while a conversation is open.
-	if DialogueBox.is_open():
+	# Stand still while a conversation, menu or fade is open.
+	var blocked := DialogueBox.is_open()
+	var main := get_parent()
+	if main != null and main.has_method("is_ui_open"):
+		blocked = blocked or bool(main.call("is_ui_open"))
+
+	if blocked:
 		velocity = Vector2.ZERO
 		return
 

@@ -105,7 +105,7 @@ they look right.
 | `status` | Always submit as `"pool"`. The game promotes characters to `"active"` automatically when a slot opens up. |
 | `personality` | 1 to 3 trait ids from `docs/PERSONALITIES.md`. The **first counts double**. This decides which gifts the character loves and hates. |
 | `description` | Short bio/hook. Not shown in-game yet, but used for review. |
-| `home_building` | An id for their in-town home/shop — art and placement not finalized yet. |
+| `home_building` | Informational for now (which building they belong to). The game places residents in town automatically. |
 | `portrait` / `sprite` | Relative paths within your folder — normally just `"portrait.png"` and `"sprite.png"` if you followed the pipeline above. |
 | `theme_music` | Optional. Audio pipeline isn't finalized yet. |
 | `placeholder_color` | Optional hex colour (e.g. `"a1584f"`) used for the placeholder blob until real art exists. |

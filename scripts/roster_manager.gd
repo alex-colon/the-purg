@@ -17,6 +17,8 @@ var active_ids: Array = []
 var pool_ids: Array = []
 var departed_ids: Array = []
 var pending_arrivals: int = 0 # departures still waiting for a replacement
+var departures: Dictionary = {}   # id -> {"day", "gate": "bright"/"ember", "mood": "hearts"/"skulls"}
+var arrival_days: Dictionary = {} # id -> the day they arrived in town (missing = was here from the start)
 
 signal character_departed(character_id: String)
 signal character_arrived(character_id: String)
@@ -63,6 +65,21 @@ func _load_saved_state() -> void:
 	departed_ids = _known_ids(parsed.get("departed", []))
 	pending_arrivals = int(parsed.get("pending_arrivals", 0))
 
+	var saved_departures: Dictionary = parsed.get("departures", {})
+	for id in saved_departures.keys():
+		if CharacterDB.characters.has(str(id)):
+			departures[str(id)] = saved_departures[id]
+
+	# Anyone who left before departures were recorded still needs a record.
+	for id in departed_ids:
+		if not departures.has(id):
+			_record_departure(str(id), 0)
+
+	var saved_arrivals: Dictionary = parsed.get("arrival_days", {})
+	for id in saved_arrivals.keys():
+		if CharacterDB.characters.has(str(id)):
+			arrival_days[str(id)] = int(saved_arrivals[id])
+
 	# Characters added to the game since this save was written get filed
 	# by their own "status", so new content shows up without a reset.
 	for id in CharacterDB.get_all_ids():
@@ -97,6 +114,7 @@ func _retire_maxed_out_characters() -> void:
 			active_ids.erase(id)
 			departed_ids.append(id)
 			pending_arrivals += 1
+			_record_departure(str(id))
 
 
 # ---------------------------------------------------------- cycling
@@ -108,14 +126,28 @@ func depart(character_id: String) -> void:
 	active_ids.erase(character_id)
 	departed_ids.append(character_id)
 	pending_arrivals += 1
+	_record_departure(character_id)
 
 	save_state()
 	character_departed.emit(character_id)
 
 
-func _on_day_changed(_day: int) -> void:
+func _record_departure(character_id: String, day: int = -1) -> void:
+	# Saints walk through the bright gate, sinners through the ember gate,
+	# whatever the player felt about them. "mood" is how they felt at the end.
+	# day 0 means "we don't know when" (a save from before departures were recorded).
+	var alignment := str(CharacterDB.get_character(character_id).get("alignment", "sinner"))
+
+	departures[character_id] = {
+		"day": Relationships.current_day if day < 0 else day,
+		"gate": "bright" if alignment == "saint" else "ember",
+		"mood": "hearts" if Relationships.get_score(character_id) >= 0 else "skulls",
+	}
+
+
+func _on_day_changed(day: int) -> void:
 	while pending_arrivals > 0:
-		if not _promote_random_pool_character():
+		if not _promote_random_pool_character(day):
 			break # pool is empty; wait until new characters are added
 
 		pending_arrivals -= 1
@@ -123,7 +155,7 @@ func _on_day_changed(_day: int) -> void:
 	save_state()
 
 
-func _promote_random_pool_character() -> bool:
+func _promote_random_pool_character(day: int) -> bool:
 	if pool_ids.is_empty():
 		push_warning("Roster: pool is empty, no one available to cycle in")
 		return false
@@ -133,6 +165,7 @@ func _promote_random_pool_character() -> bool:
 
 	pool_ids.remove_at(index)
 	active_ids.append(new_id)
+	arrival_days[new_id] = day
 	character_arrived.emit(new_id)
 	return true
 
@@ -141,6 +174,8 @@ func _promote_random_pool_character() -> bool:
 
 func reset_all() -> void:
 	departed_ids.clear()
+	departures.clear()
+	arrival_days.clear()
 	pending_arrivals = 0
 	_build_from_character_db()
 	save_state()
@@ -152,6 +187,8 @@ func save_state() -> void:
 		"pool": pool_ids,
 		"departed": departed_ids,
 		"pending_arrivals": pending_arrivals,
+		"departures": departures,
+		"arrival_days": arrival_days,
 	}
 
 	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)

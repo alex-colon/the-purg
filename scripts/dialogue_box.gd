@@ -236,16 +236,22 @@ func _on_gift_pressed() -> void:
 	_mode = Mode.GIFT
 	_action_row.visible = false
 	_gift_row.visible = true
-	_text_label.text = "What will you give them?"
 
 	for child in _gift_row.get_children():
 		_gift_row.remove_child(child)
 		child.queue_free()
 
-	for item in CharacterDB.get_all_items():
-		var item_id := str(item.get("id", ""))
-		var item_name := str(item.get("name", item_id))
-		_gift_row.add_child(_make_button(item_name, _on_item_chosen.bind(item_id), 15))
+	var owned := Relationships.owned_item_ids()
+	if owned.is_empty():
+		_text_label.text = "You have nothing to give. Try the Lost & Found, or look around town for things to pick up."
+	else:
+		_text_label.text = "What will you give them?"
+
+	for item_id in owned:
+		var id := str(item_id)
+		var item_name := str(CharacterDB.get_item(id).get("name", id))
+		var label := "%s  (x%d)" % [item_name, Relationships.item_count(id)]
+		_gift_row.add_child(_make_button(label, _on_item_chosen.bind(id), 15))
 
 	_gift_row.add_child(_make_button("Back", _on_gift_back, 15))
 	_focus_gift_row.call_deferred()
@@ -272,6 +278,10 @@ func _on_item_chosen(item_id: String) -> void:
 	var item_name := str(CharacterDB.get_item(item_id).get("name", item_id))
 
 	var tier := CharacterDB.get_gift_tier(current_character_id, item_id)
+
+	# The gift leaves your bag, and you learn how they felt about it.
+	Relationships.remove_item(item_id)
+	Relationships.record_taste(current_character_id, item_id, tier)
 	var reaction := CharacterDB.get_gift_reaction(current_character_id, tier)
 	if reaction.is_empty():
 		reaction = str(DEFAULT_REACTIONS[tier])

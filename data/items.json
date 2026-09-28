@@ -8,7 +8,8 @@
 				"gentle",
 				"natural",
 				"beautiful"
-			]
+			],
+			"price": 4
 		},
 		{
 			"id": "sweet_bun",
@@ -17,7 +18,8 @@
 			"tags": [
 				"sweet",
 				"gentle"
-			]
+			],
+			"price": 5
 		},
 		{
 			"id": "old_coin",
@@ -26,7 +28,8 @@
 			"tags": [
 				"luxury",
 				"sentimental"
-			]
+			],
+			"price": 12
 		},
 		{
 			"id": "prayer_beads",
@@ -35,7 +38,8 @@
 			"tags": [
 				"holy",
 				"sentimental"
-			]
+			],
+			"price": 10
 		},
 		{
 			"id": "whiskey",
@@ -44,7 +48,8 @@
 			"tags": [
 				"vice",
 				"risky"
-			]
+			],
+			"price": 8
 		},
 		{
 			"id": "black_candle",
@@ -53,7 +58,8 @@
 			"tags": [
 				"dark",
 				"beautiful"
-			]
+			],
+			"price": 9
 		},
 		{
 			"id": "paperback",
@@ -62,7 +68,8 @@
 			"tags": [
 				"intellectual",
 				"sentimental"
-			]
+			],
+			"price": 7
 		},
 		{
 			"id": "bone_dice",
@@ -71,7 +78,8 @@
 			"tags": [
 				"risky",
 				"vice"
-			]
+			],
+			"price": 8
 		},
 		{
 			"id": "rusty_knife",
@@ -80,7 +88,8 @@
 			"tags": [
 				"violent",
 				"dark"
-			]
+			],
+			"price": 9
 		},
 		{
 			"id": "fine_perfume",
@@ -89,7 +98,8 @@
 			"tags": [
 				"luxury",
 				"beautiful"
-			]
+			],
+			"price": 18
 		},
 		{
 			"id": "holy_water",
@@ -98,7 +108,8 @@
 			"tags": [
 				"holy",
 				"gentle"
-			]
+			],
+			"price": 12
 		},
 		{
 			"id": "old_photograph",
@@ -107,7 +118,8 @@
 			"tags": [
 				"sentimental",
 				"gentle"
-			]
+			],
+			"price": 10
 		},
 		{
 			"id": "wooden_toy",
@@ -116,7 +128,8 @@
 			"tags": [
 				"playful",
 				"natural"
-			]
+			],
+			"price": 7
 		},
 		{
 			"id": "chocolates",
@@ -125,7 +138,8 @@
 			"tags": [
 				"sweet",
 				"luxury"
-			]
+			],
+			"price": 14
 		},
 		{
 			"id": "sketchbook",
@@ -134,7 +148,8 @@
 			"tags": [
 				"beautiful",
 				"intellectual"
-			]
+			],
+			"price": 11
 		},
 		{
 			"id": "herbal_tea",
@@ -143,7 +158,8 @@
 			"tags": [
 				"gentle",
 				"natural"
-			]
+			],
+			"price": 5
 		},
 		{
 			"id": "mystery_powder",
@@ -153,7 +169,8 @@
 				"vice",
 				"risky",
 				"dark"
-			]
+			],
+			"price": 16
 		}
 	]
 }

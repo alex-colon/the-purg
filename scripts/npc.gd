@@ -56,6 +56,21 @@ func _unhandled_input(event: InputEvent) -> void:
 		DialogueBox.show_for_character(character_id)
 
 
+func leave_toward(target: Vector2, seconds: float) -> void:
+	## Called when this character's case is called: they stop being
+	## interactive and walk to their gate, fading out as they arrive.
+	player_in_range = false
+	set_process_unhandled_input(false)
+	$CollisionShape2D.set_deferred("disabled", true)
+	$Detector.set_deferred("monitoring", false)
+	queue_redraw()
+
+	var tween := create_tween()
+	tween.tween_property(self, "position", target, seconds)
+	tween.parallel().tween_property(self, "modulate:a", 0.0, seconds * 0.35).set_delay(seconds * 0.65)
+	tween.tween_callback(queue_free)
+
+
 func _on_detector_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		player_in_range = true

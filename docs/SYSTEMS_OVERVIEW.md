@@ -39,6 +39,36 @@ and by how characters react.
 Score runs from -10 (skulls) to +10 (hearts). Crossing 4, 8 or 10 (in
 either direction) plays that milestone scene.
 
+## The town
+
+The town is 2200 x 1500 px, and the camera follows you. Walk into a building's
+door (just below it) to go inside; walk into the exit door at the bottom of an
+interior to come back out.
+
+| Place | What it does |
+|---|---|
+| **Your Lodgings** | Your room. Sleep in the bed to start a new day. |
+| **Lost & Found** | The shop. Buy gift items (6 different ones each day) and sell things you don't need. |
+| **The Pub** | Order a (watered-down) drink for 3 coins, or bet on **Bone Dice** in the back. |
+| **Bureau of Case Review** | **Resident files**: standing with everyone, plus every taste you've discovered. Also check on your own case. |
+| **The Chapel** | Half-built and never finished. Light a prayer candle out front. |
+| **Notice Board** | 3 daily requests from residents. Bring the item they want for coins. Each request also teaches you something they love. |
+| **The Reflecting Pool** | Toss in 1 coin (once a day) to see something a random resident loves or hates. |
+| **Meadow / Herb Patch** | Pick Wildflowers / Herbal Tea. They grow back every morning. |
+| **The Junkyard / The Creek** | Dig or fish once a day for a random item or a few coins. |
+| **Bright Gate / Ember Gate** | Where residents go when their case is called: saints through the bright gate, sinners through the ember gate, whatever you felt about them. |
+| **Arrival Station** | Each new resident stands here on the day they arrive. |
+| **Memorial Garden** | A headstone for everyone who has left, with the day, the gate and how they felt about you. |
+
+When a resident's goodbye scene ends, you actually watch them walk to their gate.
+
+### Economy
+
+You start with 20 coins and a few items. Gifts now come from your bag, so they
+run out. Coins come from notice-board requests, selling things, foraging spots,
+the junkyard, the creek and gambling. Everything costs what its `price` in
+`data/items.json` says. Selling pays 40% of that.
+
 ## Autoloads (singletons)
 
 Registered in `project.godot`, in this order (each needs the ones above it):
@@ -48,14 +78,16 @@ Registered in `project.godot`, in this order (each needs the ones above it):
    `data/characters/` at startup, and works out gift reactions. Warns in Godot's
    Output panel if a character is missing a field or event file. Also
    finds a character's art (see "Art" below).
-2. **Relationships** (`scripts/relationship_manager.gd`) - score per
-   character, which milestone scenes have fired, the current day, and who
-   you've already spent time with today. Saved to `user://relationships.json`.
+2. **Relationships** (`scripts/relationship_manager.gd`) - the save state for the
+   whole run: scores, milestone scenes, the day, who you've spent time with today,
+   **coins, your item inventory, what you've learned about tastes, and today's
+   one-per-day flags and notice board**. Saved to `user://relationships.json`.
 3. **Roster** (`scripts/roster_manager.gd`) - who's in town (active) and
    who's waiting (pool). When a level-10 scene finishes, the character
    leaves town right away and a random pool character **arrives the next
-   morning**. Saved to `user://roster.json`, so restarting the game keeps
-   everyone where they were.
+   morning**. It also records where and when everyone left (for the gates and the
+   memorial) and the day newcomers arrived. Saved to `user://roster.json`, so
+   restarting the game keeps everyone where they were.
 4. **DialogueBox** (`scenes/dialogue_box.tscn` + `scripts/dialogue_box.gd`) -
    the conversation UI (built in code). Menu -> gift list -> a scene that
    plays one line per Enter/click. A level-10 scene ends with the character
@@ -63,14 +95,22 @@ Registered in `project.godot`, in this order (each needs the ones above it):
 
 ## Scenes and scripts
 
-- `scripts/main.gd` - room and town, the HUD (day counter, arrival/departure
-  messages), the bed/sleep interaction, NPC placement. Each character keeps
-  the same spot in town while they stay (4 spots for now: in front of the
-  home, shop, pub and office).
-- `scripts/npc.gd` + `scenes/npc.tscn` - a character standing in town.
-  Press Enter near them to talk. Uses their sprite, or a coloured
-  placeholder if they don't have art yet.
-- `scripts/player.gd` - the player. Stands still while a conversation is open.
+- `scripts/map_data.gd` - the layout of every place (bedroom, town, and the three
+  interiors) as plain data: what to draw, what's solid, where the doors are,
+  which spots you can interact with, and where residents stand. **To add or move
+  a building or a spot, edit this file only.** Its comments explain the rules.
+- `scripts/main.gd` - loads a map, draws it, builds its walls, moves you through
+  doors, runs the camera, finds the spot you're standing at, runs the HUD (day,
+  coins, messages) and places residents. Residents keep the same spot while they
+  stay in town; a newcomer stands at the station on their first day.
+- `scripts/town_actions.gd` - what each spot *does* (shop, board, pool, dice,
+  bureau files, ...). To add a new kind of spot: give it a `kind` in `map_data.gd`,
+  then add a branch to `run()` and a function.
+- `scripts/menu_ui.gd` - the one reusable pop-up (title, text, buttons) every
+  town screen uses.
+- `scripts/npc.gd` + `scenes/npc.tscn` - a resident standing in town. Press Enter
+  near them to talk. When their case is called they walk to their gate.
+- `scripts/player.gd` - the player. Stands still while any menu or conversation is open.
 - `scripts/sprite_util.gd` - shows a sprite at a consistent on-screen height
   based on the *visible* artwork, ignoring transparent margins.
 
@@ -103,9 +143,11 @@ the warm ones.
 
 ## Not built yet
 
-- **Inventory / shop** - gifts are unlimited for now.
-- **A journal** that reveals what you've learned about each character's tastes.
+- **Your own case review** - the Bureau tells you it's "pending". The real ending
+  (what triggers it, how it reflects how you treated people) isn't written yet.
+- **Character schedules** - residents stand in one place all day.
 - **Front / back / side sprites** and walk animation.
-- **Mini games**, building interiors, music and sound.
+- **Music and sound.**
+- **Loading characters from outside the project folder** (for community submissions).
 - **Moderation flow** - `status` has room for a `"pending"` state, nothing
   reviews submissions yet.

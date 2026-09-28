@@ -1,12 +1,14 @@
 extends Node
 ## Relationships (autoload)
 ##
-## Tracks, per character id:
+## The save state for the whole run. Per character id:
 ##   - a score from -10 (max skulls) to +10 (max hearts)
 ##   - which milestone events (4 / 8 / 10) have already fired
-## and, for the whole game:
-##   - the current day
-##   - who the player has already spent time with today
+##   - what the player has learned about their gift tastes
+## and for the player / world:
+##   - the current day, and who the player has spent time with today
+##   - coins and the item inventory
+##   - one-per-day flags (foraging, digging, ...) and the day's notice board
 ##
 ## Positive score = hearts, negative score = skulls.
 ## The DialogueBox listens for `milestone_reached` and plays the scenes;
@@ -22,8 +24,18 @@ var unlocked_events: Dictionary = {} # id -> Array of event keys already fired
 var acted_today: Dictionary = {}     # id -> true once the player gifted/insulted them today
 var current_day: int = 1
 
+const STARTING_COINS := 20
+const STARTING_ITEMS := {"wildflowers": 1, "sweet_bun": 1, "old_coin": 1}
+
+var coins: int = STARTING_COINS
+var inventory: Dictionary = STARTING_ITEMS.duplicate() # item id -> how many you hold
+var known_tastes: Dictionary = {}  # character id -> {item id -> "love"/"like"/...}
+var daily_flags: Dictionary = {}   # "forage:meadow" -> true, cleared every morning
+var board: Dictionary = {}         # today's notice-board requests
+
 signal milestone_reached(character_id: String, event_key: String, event_data: Dictionary)
 signal day_changed(day: int)
+signal inventory_changed
 
 
 func _ready() -> void:
@@ -90,8 +102,83 @@ func mark_acted_today(character_id: String) -> void:
 func start_new_day() -> void:
 	current_day += 1
 	acted_today.clear()
+	daily_flags.clear()
 	save_data()
 	day_changed.emit(current_day)
+
+
+func flag_today(key: String) -> bool:
+	## True if the one-per-day thing called `key` was already done today.
+	return bool(daily_flags.get(key, false))
+
+
+func set_flag_today(key: String) -> void:
+	daily_flags[key] = true
+	save_data()
+
+
+# ------------------------------------------------- coins and inventory
+
+func add_coins(amount: int) -> void:
+	coins = maxi(0, coins + amount)
+	save_data()
+	inventory_changed.emit()
+
+
+func spend_coins(amount: int) -> bool:
+	if coins < amount:
+		return false
+
+	coins -= amount
+	save_data()
+	inventory_changed.emit()
+	return true
+
+
+func item_count(item_id: String) -> int:
+	return int(inventory.get(item_id, 0))
+
+
+func add_item(item_id: String, amount: int = 1) -> void:
+	inventory[item_id] = item_count(item_id) + amount
+	save_data()
+	inventory_changed.emit()
+
+
+func remove_item(item_id: String) -> bool:
+	var have := item_count(item_id)
+	if have <= 0:
+		return false
+
+	if have == 1:
+		inventory.erase(item_id)
+	else:
+		inventory[item_id] = have - 1
+
+	save_data()
+	inventory_changed.emit()
+	return true
+
+
+func owned_item_ids() -> Array:
+	## Item ids you hold at least one of, in the order items.json lists them.
+	var result: Array = []
+
+	for item in CharacterDB.get_all_items():
+		var id := str(item.get("id", ""))
+		if item_count(id) > 0:
+			result.append(id)
+
+	return result
+
+
+func record_taste(character_id: String, item_id: String, tier: String) -> void:
+	## Remember what the player has learned about a character's tastes.
+	if not known_tastes.has(character_id):
+		known_tastes[character_id] = {}
+
+	known_tastes[character_id][item_id] = tier
+	save_data()
 
 
 # ------------------------------------------------------- save / load
@@ -100,8 +187,14 @@ func reset_all() -> void:
 	scores.clear()
 	unlocked_events.clear()
 	acted_today.clear()
+	known_tastes.clear()
+	daily_flags.clear()
+	board = {}
+	inventory = STARTING_ITEMS.duplicate()
+	coins = STARTING_COINS
 	current_day = 1
 	save_data()
+	inventory_changed.emit()
 
 
 func save_data() -> void:
@@ -110,6 +203,11 @@ func save_data() -> void:
 		"unlocked_events": unlocked_events,
 		"acted_today": acted_today,
 		"current_day": current_day,
+		"coins": coins,
+		"inventory": inventory,
+		"known_tastes": known_tastes,
+		"daily_flags": daily_flags,
+		"board": board,
 	}
 
 	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
@@ -140,3 +238,18 @@ func load_data() -> void:
 	unlocked_events = parsed.get("unlocked_events", {})
 	acted_today = parsed.get("acted_today", {})
 	current_day = int(parsed.get("current_day", 1))
+
+	# Older saves have no coins or items: start those fresh.
+	coins = int(parsed.get("coins", STARTING_COINS))
+
+	inventory.clear()
+	if parsed.has("inventory"):
+		var saved_inventory: Dictionary = parsed.get("inventory", {})
+		for id in saved_inventory.keys():
+			inventory[str(id)] = int(saved_inventory[id])
+	else:
+		inventory = STARTING_ITEMS.duplicate()
+
+	known_tastes = parsed.get("known_tastes", {})
+	daily_flags = parsed.get("daily_flags", {})
+	board = parsed.get("board", {})
