@@ -1,0 +1,14 @@
+{
+	"type": "skull",
+	"level": 8,
+	"dialogue": [
+		{
+			"speaker": "Ambrose Quill",
+			"text": "I've reached the letter 'Y' in the files. Yours is right beside 'Z'. Do you know what that means?"
+		},
+		{
+			"speaker": "Ambrose Quill",
+			"text": "It means you're at the very end. I'd suggest doing something about that."
+		}
+	]
+}

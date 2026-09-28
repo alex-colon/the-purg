@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bd7ol52xwwf3l"
-path="res://.godot/imported/ghostgal-sprite.png-f667530c306ec5a3566e62483fd0bd81.ctex"
+uid="uid://cloo2shb58m8w"
+path="res://.godot/imported/ghost_gal_source.png-00cbe00dd2cabdf6723ac4780be50ba1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/characters/npcs/sprites/ghostgal-sprite.png"
-dest_files=["res://.godot/imported/ghostgal-sprite.png-f667530c306ec5a3566e62483fd0bd81.ctex"]
+source_file="res://assets/characters/npcs/townies/ghost_gal_source.png"
+dest_files=["res://.godot/imported/ghost_gal_source.png-00cbe00dd2cabdf6723ac4780be50ba1.ctex"]
 
 [params]
 

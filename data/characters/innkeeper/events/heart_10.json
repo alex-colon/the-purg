@@ -1,0 +1,19 @@
+{
+	"type": "heart",
+	"level": 10,
+	"departs": true,
+	"dialogue": [
+		{
+			"speaker": "Dolores Marrow",
+			"text": "They called my case. Below, obviously. Thirty years of watered-down whiskey adds up."
+		},
+		{
+			"speaker": "Dolores Marrow",
+			"text": "But I'm leaving with a friend, which is more than I thought I'd get. Don't tell anyone I said that."
+		},
+		{
+			"speaker": "Dolores Marrow",
+			"text": "[She slides a single bottle across the bar. It's the good stuff. She never poured this for anyone.]"
+		}
+	]
+}

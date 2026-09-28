@@ -1,0 +1,18 @@
+{
+	"id": "professor",
+	"name": "Ambrose Quill",
+	"alignment": "saint",
+	"status": "pool",
+	"personality": [
+		"scholarly",
+		"humble"
+	],
+	"description": "A retired schoolteacher who insists his presence in purgatory is a clerical error, and has taken it upon himself to alphabetize the town's case files while he waits for it to be corrected.",
+	"home_building": "shop",
+	"placeholder_color": "6f86a8",
+	"idle_dialogue": [
+		"Ah, hello! Mind the stack by your foot. That's the letter M, and it is delicate.",
+		"I've filed every complaint this town has ever made. There are a great many about the fountain.",
+		"There's been a clerical error, you know. I'm certain it will be sorted out any day now."
+	]
+}

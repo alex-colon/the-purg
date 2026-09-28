@@ -1,121 +1,111 @@
-# The Purg — Systems Overview (for you, the developer)
+# The Purg - Systems Overview (for you, the developer)
 
-This is a plain-language map of what got added and how it fits together.
-Nothing here requires editing GDScript to add a new character — that's
-the whole point.
+A plain-language map of how the game fits together. Adding a character
+never requires editing GDScript - that's the point.
 
-## The four new autoloads (singletons)
+## The daily loop
 
-Registered in Project Settings → Autoload (already set up in
-`project.godot`), in this order, because each depends on the ones before it:
+- The HUD (top-left) shows the current **Day**.
+- Each character can spend time with you **once per day**: you either
+  give them a gift or say something cruel. Talking is free and unlimited.
+- To start the next day, walk to the **bed** in your room and press
+  **Enter**. The screen fades, the day counter goes up, everyone's
+  "already spent time today" flag resets.
+- **F9** wipes all saved progress and restarts (for playtesting).
 
-1. **CharacterDB** (`scripts/character_loader.gd`)
-   On game start, scans `res://data/characters/` and loads every
-   subfolder's `character.json` plus its `events/*.json` files into
-   memory. This is the entire "content pipeline" — a new character
-   folder is all it takes.
+### Points
 
-2. **Relationships** (`scripts/relationship_manager.gd`)
-   Tracks a single score per character, -10 to +10 (positive = hearts,
-   negative = skulls). Checks for milestone crossings (4/8/10) and
-   fires signals when one unlocks. Saves/loads automatically to
-   `user://relationships.json`, so progress survives closing the game.
+| Action | Points |
+|---|---|
+| Gift they love | +3 |
+| Gift they like | +2 |
+| Neutral gift | +1 |
+| Gift they dislike | -1 |
+| Gift they hate | -3 |
+| Be rude | -2 |
 
-3. **Roster** (`scripts/roster_manager.gd`)
-   Splits all loaded characters into `active_ids` (currently in town)
-   and `pool_ids` (waiting) based on each character's `status` field.
-   Listens for `Relationships.case_called` — when a character hits
-   level 10 on either track, Roster removes them from `active_ids` and
-   promotes a random character from `pool_ids` to take their place.
+### Personalities and gifts
 
-4. **DialogueBox** (`scenes/dialogue_box.tscn` + `scripts/dialogue_box.gd`)
-   A simple UI panel, present the whole game (as an autoload scene, not
-   just a script). `DialogueBox.show_for_character(id)` shows that
-   character's most relevant line — the highest unlocked milestone, or
-   idle chatter otherwise — with two buttons: give a gift (+2) or be
-   rude (-2).
+Each character has 1-3 **personality traits** (16 to choose from: 8 good, 8
+flawed). Each item has **tags**. A trait loves and dislikes certain tags, so
+how a character feels about any gift is worked out automatically. The first
+trait counts double. A character's `gifts.json` can override single items
+for personal quirks (Brother Tallow hates the Tarnished Coin because of what
+he stole). See `docs/PERSONALITIES.md` for the full table.
 
-## The NPC scene
+Traits are hidden from the player for now: they find out by trial and error,
+and by how characters react.
 
-`scenes/npc.tscn` + `scripts/npc.gd` — a `CharacterBody2D` with an
-`Area2D` "Detector" child. When the player walks into range, it shows a
-prompt; pressing Enter (the default `ui_accept` action) opens the
-DialogueBox for that character. It currently draws itself as a plain
-pale rectangle — same placeholder approach as your existing Player and
-buildings. Swap `_draw()` for a `Sprite2D`/`AnimatedSprite2D` once art
-exists.
+Score runs from -10 (skulls) to +10 (hearts). Crossing 4, 8 or 10 (in
+either direction) plays that milestone scene.
 
-## How main.gd ties it together
+## Autoloads (singletons)
 
-`build_town()` now calls `spawn_npcs()`, which instantiates one NPC
-scene per id in `Roster.active_ids`, at fixed placeholder positions.
-`enter_room()` clears them out (NPCs only exist in town for now).
-`main.gd` also listens for `Roster.character_departed` /
-`character_arrived` and re-spawns the NPC list live if you're standing
-in town when someone's case gets called.
+Registered in `project.godot`, in this order (each needs the ones above it):
 
-## What's included as a working example
+1. **CharacterDB** (`scripts/character_loader.gd`) - loads
+   `data/personalities.json`, `data/items.json` and every folder in
+   `data/characters/` at startup, and works out gift reactions. Warns in Godot's
+   Output panel if a character is missing a field or event file. Also
+   finds a character's art (see "Art" below).
+2. **Relationships** (`scripts/relationship_manager.gd`) - score per
+   character, which milestone scenes have fired, the current day, and who
+   you've already spent time with today. Saved to `user://relationships.json`.
+3. **Roster** (`scripts/roster_manager.gd`) - who's in town (active) and
+   who's waiting (pool). When a level-10 scene finishes, the character
+   leaves town right away and a random pool character **arrives the next
+   morning**. Saved to `user://roster.json`, so restarting the game keeps
+   everyone where they were.
+4. **DialogueBox** (`scenes/dialogue_box.tscn` + `scripts/dialogue_box.gd`) -
+   the conversation UI (built in code). Menu -> gift list -> a scene that
+   plays one line per Enter/click. A level-10 scene ends with the character
+   leaving.
 
-- **`data/characters/ghost_gal/`** — Wisp, a full reference character
-  with all six events written out. Fully playable: walk up to her,
-  press Enter, give gifts or be rude, watch her case eventually get
-  called and her disappear from town.
-- **`data/characters/silent_monk/`** — Brother Tallow, a minimal
-  `status: "pool"` character with no events yet. His only job is to
-  prove the cycling logic: when Wisp's case is called, he's the one
-  who gets randomly promoted into her spot.
+## Scenes and scripts
 
-## The art pipeline
+- `scripts/main.gd` - room and town, the HUD (day counter, arrival/departure
+  messages), the bed/sleep interaction, NPC placement. Each character keeps
+  the same spot in town while they stay (4 spots for now: in front of the
+  home, shop, pub and office).
+- `scripts/npc.gd` + `scenes/npc.tscn` - a character standing in town.
+  Press Enter near them to talk. Uses their sprite, or a coloured
+  placeholder if they don't have art yet.
+- `scripts/player.gd` - the player. Stands still while a conversation is open.
+- `scripts/sprite_util.gd` - shows a sprite at a consistent on-screen height
+  based on the *visible* artwork, ignoring transparent margins.
 
-`tools/art_pipeline/process_character_art.py` turns one AI-generated
-full-body character image into the two files the game actually uses:
-a small palette-reduced `sprite.png` (64x96, real pixelation via hard
-downscale + quantize + nearest-neighbor upscale) and a more detailed
-`portrait.png` (256x256, cropped to the bust). It trims stray
-near-invisible alpha pixels before finding the image's bounding box,
-which matters — AI-generated "transparent" backgrounds sometimes leave
-faint artifacts that throw off a naive crop. See
-`docs/CHARACTER_TEMPLATE.md` for the actual generation prompt and
-usage instructions. Wisp's and the player's art were both produced
-this way — check `assets/characters/npcs/townies/ghost_gal_sprite.png`
-etc. for reference output.
+## Art
 
-`npc.gd` and `player.gd` both check for a real sprite file at
-`_ready()` and load it into a `Sprite2D` child if present, falling
-back to the old placeholder rectangle otherwise — so a character
-works whether or not their art exists yet. `dialogue_box.gd` does the
-same for portraits.
+`CharacterDB.get_art_path()` looks for a character's image in this order:
+1. the `sprite` / `portrait` path in `character.json` (if the file exists)
+2. `res://assets/characters/npcs/sprites/<id>.png` and
+   `res://assets/characters/npcs/portraits/<id>.png`
+3. nothing - the NPC is drawn as a coloured blob and the dialogue box has
+   no portrait.
 
-## What's deliberately NOT built yet (by your own call)
+So the simplest way to add art is to save the two images with the
+character's id as the file name, e.g. `sprites/innkeeper.png`. Sprites are
+scaled to 96px tall; override per character with `"sprite_height"` in
+`character.json`. `tools/art_pipeline/process_character_art.py` turns one
+AI-generated image into a clean sprite + portrait.
 
-- **Content moderation** — the `status` field already has room for a
-  future `"pending"` state, but there's no review flow. Not needed
-  until external submissions are actually open.
-- **Animation** — sprites are currently static single images (no walk
-  cycle, no directional facing). Fine for now; revisit once the core
-  loop feels good.
-- **Building-specific spawn points** — NPCs currently spawn at two
-  hardcoded positions. Worth revisiting once buildings become real
-  scenes instead of drawn shapes.
+## Characters included
 
-## Suggested next steps
+| id | Name | Alignment | Traits | Starts |
+|---|---|---|---|---|
+| `ghost_gal` | Wisp | saint | cheerful, compassionate | in town |
+| `silent_monk` | Brother Tallow | sinner | devout, greedy | in town |
+| `innkeeper` | Dolores Marrow | sinner | wrathful, greedy | pool |
+| `professor` | Ambrose Quill | saint | scholarly, humble | pool |
 
-1. Playtest the loop as-is (see the walkthrough below).
-2. Decide on an actual art style/pipeline for character sprites — this
-   unblocks a lot of "does this feel like a real game" progress.
-3. Write 2-3 more reference characters by hand to stress-test whether
-   the JSON schema holds up for very different personalities (a
-   "sinner" character told from the skull side would be a good test).
-4. Only after that: formalize `docs/CHARACTER_TEMPLATE.md` for public
-   submission and think about moderation.
+Dolores is the schema stress-test: hell-bound, and her skull-side scenes are
+the warm ones.
 
-## Quick playtest walkthrough
+## Not built yet
 
-1. Open the project in Godot 4.7, run the main scene.
-2. Walk down through the door to reach the town.
-3. Walk to the placeholder NPC near the "home" building (Wisp) and
-   press Enter.
-4. Click "Give Gift" repeatedly (or "Be Rude" to test the skull track)
-   and watch her dialogue line change as you cross 4, 8, then 10.
-5. At 10, her case is called, she disappears from town, and Brother
-   Tallow appears in her place at the same/next spawn slot.
+- **Inventory / shop** - gifts are unlimited for now.
+- **A journal** that reveals what you've learned about each character's tastes.
+- **Front / back / side sprites** and walk animation.
+- **Mini games**, building interiors, music and sound.
+- **Moderation flow** - `status` has room for a `"pending"` state, nothing
+  reviews submissions yet.

@@ -1,0 +1,19 @@
+{
+	"loves": [
+		"prayer_beads"
+	],
+	"hates": [
+		"old_coin"
+	],
+	"reactions": {
+		"love": "[He clutches the {item} to his chest and bows deeply.]",
+		"like": "[He nods gratefully and tucks the {item} into his sleeve.]",
+		"neutral": "[He accepts the {item} with a polite nod. Nothing more.]",
+		"dislike": "[He holds the {item} at arm's length, then sets it down carefully.]",
+		"hate": "[He stares at the {item} as though it has accused him of something. He does not take it.]"
+	},
+	"rude_reactions": [
+		"[He looks at you, unblinking, and says nothing. As always.]",
+		"[He writes something on his slate, then wipes it away before you can read it.]"
+	]
+}

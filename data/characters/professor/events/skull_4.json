@@ -1,0 +1,14 @@
+{
+	"type": "skull",
+	"level": 4,
+	"dialogue": [
+		{
+			"speaker": "Ambrose Quill",
+			"text": "I have taught four thousand children. I have never once been spoken to like that."
+		},
+		{
+			"speaker": "Ambrose Quill",
+			"text": "Consider this a formal warning. It will go in your file. Yes, you have a file."
+		}
+	]
+}

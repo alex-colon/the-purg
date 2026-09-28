@@ -1,0 +1,14 @@
+{
+	"type": "skull",
+	"level": 4,
+	"dialogue": [
+		{
+			"speaker": "Dolores Marrow",
+			"text": "Ha! Finally, someone with a spine. Everyone else in this town says please and thank you like it'll buy them a harp."
+		},
+		{
+			"speaker": "Dolores Marrow",
+			"text": "Sit. First round's free. Keep insulting me, it's the best entertainment I've had in decades."
+		}
+	]
+}

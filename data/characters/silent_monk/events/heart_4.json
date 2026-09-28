@@ -1,0 +1,14 @@
+{
+	"type": "heart",
+	"level": 4,
+	"dialogue": [
+		{
+			"speaker": "Brother Tallow",
+			"text": "[He raises a small slate.] 'You keep stopping to talk. Most people hurry past the silent one.'"
+		},
+		{
+			"speaker": "Brother Tallow",
+			"text": "[He smiles faintly and rubs the chalk away with his sleeve.]"
+		}
+	]
+}

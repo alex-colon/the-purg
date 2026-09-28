@@ -2,6 +2,9 @@ extends CharacterBody2D
 
 const SPEED := 200.0
 const SPRITE_PATH := "res://assets/characters/player/purple_fella_sprite.png"
+const SPRITE_HEIGHT := 96.0 # keep in step with npc.gd's DEFAULT_SPRITE_HEIGHT
+
+const SpriteUtil := preload("res://scripts/sprite_util.gd")
 
 var _sprite: Sprite2D = null
 
@@ -19,13 +22,16 @@ func _try_load_sprite() -> void:
 	if texture == null:
 		return
 
-	_sprite = Sprite2D.new()
-	_sprite.texture = texture
-	_sprite.position = Vector2(0, -texture.get_height() / 2.0 + 24)
+	_sprite = SpriteUtil.build_sprite(texture, SPRITE_HEIGHT, 24.0)
 	add_child(_sprite)
 
 
 func _physics_process(_delta: float) -> void:
+	# Stand still while a conversation is open.
+	if DialogueBox.is_open():
+		velocity = Vector2.ZERO
+		return
+
 	var direction := Vector2.ZERO
 
 	if Input.is_key_pressed(KEY_LEFT) or Input.is_key_pressed(KEY_A):

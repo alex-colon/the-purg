@@ -1,16 +1,19 @@
 extends CharacterBody2D
 ## NPC
 ##
-## A character rendered in the world. Reads its identity from
-## CharacterDB by `character_id` and opens the DialogueBox when the
-## player interacts with it. Draws a plain placeholder shape for now --
-## swap this for a sprite once art exists (see draw comment below).
+## A character standing in town. Looks up its identity in CharacterDB by
+## `character_id`, shows its sprite (or a coloured placeholder if no art
+## exists yet), and opens the DialogueBox when the player presses Enter
+## while standing close.
+
+const SpriteUtil := preload("res://scripts/sprite_util.gd")
+
+# Default on-screen height of the visible character art, in pixels. A
+# character can override this with an optional "sprite_height" number in
+# its character.json (handy for very tall or very small characters).
+const DEFAULT_SPRITE_HEIGHT := 96.0
 
 @export var character_id: String = ""
-
-# Sprites are scaled to this height in-game, so art of any source
-# resolution (64x96, 1024x1024, ...) ends up the same on-screen size.
-const SPRITE_TARGET_HEIGHT := 96.0
 
 var player_in_range: bool = false
 var _data: Dictionary = {}
@@ -28,33 +31,29 @@ func _ready() -> void:
 
 
 func _try_load_sprite() -> void:
-	var sprite_path: String = _data.get("sprite", "")
+	var sprite_path := CharacterDB.get_art_path(character_id, "sprite")
 
-	if sprite_path.is_empty() or not ResourceLoader.exists(sprite_path):
+	if sprite_path.is_empty():
 		return # no real art yet -- _draw() below covers this with a placeholder
 
 	var texture: Texture2D = load(sprite_path)
 	if texture == null:
 		return
 
-	var scale_factor := SPRITE_TARGET_HEIGHT / float(texture.get_height())
+	var height := float(_data.get("sprite_height", DEFAULT_SPRITE_HEIGHT))
 
-	_sprite = Sprite2D.new()
-	_sprite.texture = texture
-	_sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST # keep pixel edges crisp
-	_sprite.scale = Vector2(scale_factor, scale_factor)
 	# Feet line up with the bottom of the collision box (y = 24).
-	_sprite.position = Vector2(0, 24.0 - SPRITE_TARGET_HEIGHT / 2.0)
+	_sprite = SpriteUtil.build_sprite(texture, height, 24.0)
 	add_child(_sprite)
 
 
-func _process(_delta: float) -> void:
-	if player_in_range and Input.is_action_just_pressed("ui_accept"):
-		_interact()
+func _unhandled_input(event: InputEvent) -> void:
+	if not player_in_range or DialogueBox.is_open():
+		return
 
-
-func _interact() -> void:
-	DialogueBox.show_for_character(character_id)
+	if event.is_action_pressed("ui_accept"):
+		get_viewport().set_input_as_handled()
+		DialogueBox.show_for_character(character_id)
 
 
 func _on_detector_body_entered(body: Node2D) -> void:
@@ -70,19 +69,18 @@ func _on_detector_body_exited(body: Node2D) -> void:
 
 
 func _draw() -> void:
-	var display_name: String = _data.get("name", character_id)
-
 	if _sprite == null:
-		# Placeholder art for characters that haven't supplied a sprite yet.
-		var body_color := Color("cfd8dc")
+		# Placeholder for characters that haven't supplied a sprite yet.
+		# Give a character its own colour with "placeholder_color" in character.json.
+		var body_color := Color.from_string(str(_data.get("placeholder_color", "cfd8dc")), Color("cfd8dc"))
 		draw_rect(Rect2(-16, -24, 32, 48), body_color)
 		draw_circle(Vector2(0, -30), 12, body_color.lightened(0.2))
 
 	if player_in_range:
-		draw_string(
-			ThemeDB.fallback_font,
-			Vector2(-46, -50),
-			"[Enter] Talk to %s" % display_name,
-			HORIZONTAL_ALIGNMENT_CENTER,
-			92
-		)
+		var text := "[Enter] Talk to %s" % str(_data.get("name", character_id))
+		var font := ThemeDB.fallback_font
+		var text_size := font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, 16)
+		var text_pos := Vector2(-text_size.x / 2.0, -84)
+
+		draw_string_outline(font, text_pos, text, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, 4, Color.BLACK)
+		draw_string(font, text_pos, text, HORIZONTAL_ALIGNMENT_LEFT, -1, 16, Color.WHITE)

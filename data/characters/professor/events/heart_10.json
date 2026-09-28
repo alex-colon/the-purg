@@ -1,0 +1,19 @@
+{
+	"type": "heart",
+	"level": 10,
+	"departs": true,
+	"dialogue": [
+		{
+			"speaker": "Ambrose Quill",
+			"text": "My case has finally been called! Q, at long last."
+		},
+		{
+			"speaker": "Ambrose Quill",
+			"text": "Heaven, they say. I always suspected the paperwork would come through eventually."
+		},
+		{
+			"speaker": "Ambrose Quill",
+			"text": "Here. I filed your file under 'F', for friend. Whatever comes next, remember that."
+		}
+	]
+}

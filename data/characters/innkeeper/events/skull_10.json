@@ -1,0 +1,19 @@
+{
+	"type": "skull",
+	"level": 10,
+	"departs": true,
+	"dialogue": [
+		{
+			"speaker": "Dolores Marrow",
+			"text": "They called my case. I'm going to Hell, and honestly? I'm looking forward to the company."
+		},
+		{
+			"speaker": "Dolores Marrow",
+			"text": "You and me, we understood each other. Nobody else here ever did."
+		},
+		{
+			"speaker": "Dolores Marrow",
+			"text": "Pour one out for me. Not the good stuff. Never the good stuff."
+		}
+	]
+}

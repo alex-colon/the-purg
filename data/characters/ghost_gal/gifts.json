@@ -1,0 +1,23 @@
+{
+	"personality": [
+		"cheerful",
+		"compassionate"
+	],
+	"loves": [
+		"wildflowers"
+	],
+	"hates": [
+		"black_candle"
+	],
+	"reactions": {
+		"love": "Oh! {item}! I haven't had these since before I... you know. Thank you!",
+		"like": "Aw, the {item}. That's sweet of you.",
+		"neutral": "Oh. The {item}. ...Thank you, I suppose?",
+		"dislike": "Um. The {item}? I appreciate the thought, but... no.",
+		"hate": "{item}?! Get that away from me! What is wrong with you?"
+	},
+	"rude_reactions": [
+		"Wow. Rude. And I died a hero.",
+		"Was that necessary? I'm already dead, you know."
+	]
+}

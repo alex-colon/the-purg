@@ -1,0 +1,14 @@
+{
+	"type": "heart",
+	"level": 4,
+	"dialogue": [
+		{
+			"speaker": "Dolores Marrow",
+			"text": "Why are you being nice to me? What do you want? A discount? There's no discount."
+		},
+		{
+			"speaker": "Dolores Marrow",
+			"text": "...Fine. Your first drink's on the house. Don't make it weird."
+		}
+	]
+}

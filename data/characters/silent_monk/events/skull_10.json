@@ -1,0 +1,19 @@
+{
+	"type": "skull",
+	"level": 10,
+	"departs": true,
+	"dialogue": [
+		{
+			"speaker": "Brother Tallow",
+			"text": "[He does not reach for the slate this time. He simply stares at you.]"
+		},
+		{
+			"speaker": "Brother Tallow",
+			"text": "They called my case. Forty years I kept silent, and you are the only person who ever made me wish I hadn't."
+		},
+		{
+			"speaker": "Brother Tallow",
+			"text": "[He leaves. The silence he takes with him feels heavier than before.]"
+		}
+	]
+}

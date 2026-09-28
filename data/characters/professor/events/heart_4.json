@@ -1,0 +1,14 @@
+{
+	"type": "heart",
+	"level": 4,
+	"dialogue": [
+		{
+			"speaker": "Ambrose Quill",
+			"text": "Ah, a reader! I can always tell. You have the look of someone who dog-ears pages."
+		},
+		{
+			"speaker": "Ambrose Quill",
+			"text": "Please don't dog-ear pages. But do come by again."
+		}
+	]
+}

@@ -1,0 +1,14 @@
+{
+	"type": "skull",
+	"level": 4,
+	"dialogue": [
+		{
+			"speaker": "Brother Tallow",
+			"text": "[He writes on his slate, then holds it up, unblinking.] 'Your manners are a sin. I would know.'"
+		},
+		{
+			"speaker": "Brother Tallow",
+			"text": "[He wipes the slate clean with slow, deliberate contempt.]"
+		}
+	]
+}

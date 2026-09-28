@@ -1,0 +1,23 @@
+{
+	"type": "heart",
+	"level": 10,
+	"departs": true,
+	"dialogue": [
+		{
+			"speaker": "Brother Tallow",
+			"text": "[He sets the slate down and opens his mouth for the first time since you met him.]"
+		},
+		{
+			"speaker": "Brother Tallow",
+			"text": "My case has been called. Below, I expect. I earned it."
+		},
+		{
+			"speaker": "Brother Tallow",
+			"text": "But I go with a lighter conscience than I arrived with. That is your doing. Thank you."
+		},
+		{
+			"speaker": "Brother Tallow",
+			"text": "[He bows, and the silence he leaves behind is gentler than the one he kept.]"
+		}
+	]
+}

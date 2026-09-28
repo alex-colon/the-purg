@@ -1,0 +1,19 @@
+{
+	"loves": [
+		"whiskey"
+	],
+	"hates": [
+		"prayer_beads"
+	],
+	"reactions": {
+		"love": "Now THAT is what I'm talking about. {item}! Finally, someone with taste.",
+		"like": "Huh. The {item}. Not bad. Not bad at all.",
+		"neutral": "The {item}. Sure. I'll find a use for it. Or sell it.",
+		"dislike": "The {item}? Do I look like I want that?",
+		"hate": "Get {item} out of my sight before I charge you for looking at it."
+	},
+	"rude_reactions": [
+		"Ha! Is that all you've got? I've been insulted by professionals.",
+		"Careful. I keep a bat under the bar, and I know how to use it."
+	]
+}

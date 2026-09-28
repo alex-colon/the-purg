@@ -5,9 +5,8 @@
 	"status": "active",
 	"description": "A cheerful ghost who drowned saving a child from a river. She's certain she's heaven-bound and treats her stay in purgatory like an extended vacation.",
 	"home_building": "ghost_gal_home",
-	"portrait": "res://assets/characters/npcs/townies/ghost_gal_portrait.png",
-	"sprite": "res://assets/characters/npcs/townies/ghost_gal_sprite.png",
-	"theme_music": "assets/characters/npcs/townies/ghost_gal/theme.ogg",
+	"portrait": "res://assets/characters/npcs/portraits/ghost gal/ghost_gal.png",
+	"sprite": "res://assets/characters/npcs/sprites/ghost gal/ghost_gal.png",
 	"idle_dialogue": [
 		"The weather's always perfect here. I miss rain, honestly.",
 		"Have you met the innkeeper yet? Absolute menace.",

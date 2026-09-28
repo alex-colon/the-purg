@@ -25,10 +25,16 @@ your_character_id/
     skull_4.json
     skull_8.json
     skull_10.json
-  sprite.png     (64x96, transparent background)
-  portrait.png   (256x256, transparent background)
+  gifts.json
+  sprite.png     (transparent background)
+  portrait.png   (transparent background)
   theme.ogg      (planned — audio pipeline not finalized yet)
 ```
+
+Art can live in the game's shared art folders instead. If the files are
+named after the character's id, the game finds them automatically:
+`assets/characters/npcs/sprites/<id>.png` and
+`assets/characters/npcs/portraits/<id>.png`.
 
 ## Generating art without an artist
 
@@ -78,6 +84,7 @@ they look right.
 	"name": "Display Name",
 	"alignment": "saint",
 	"status": "pool",
+	"personality": ["cheerful", "compassionate"],
 	"description": "One or two sentences: who they were, how they died, why they're stuck here.",
 	"home_building": "your_character_id_home",
 	"portrait": "portrait.png",
@@ -96,11 +103,46 @@ they look right.
 | `name` | What players see. |
 | `alignment` | `"saint"` (heaven-bound) or `"sinner"` (hell-bound). |
 | `status` | Always submit as `"pool"`. The game promotes characters to `"active"` automatically when a slot opens up. |
+| `personality` | 1 to 3 trait ids from `docs/PERSONALITIES.md`. The **first counts double**. This decides which gifts the character loves and hates. |
 | `description` | Short bio/hook. Not shown in-game yet, but used for review. |
 | `home_building` | An id for their in-town home/shop — art and placement not finalized yet. |
 | `portrait` / `sprite` | Relative paths within your folder — normally just `"portrait.png"` and `"sprite.png"` if you followed the pipeline above. |
-| `theme_music` | Relative path within your folder. Audio pipeline isn't finalized yet — for now, list the filename you intend to supply. |
+| `theme_music` | Optional. Audio pipeline isn't finalized yet. |
+| `placeholder_color` | Optional hex colour (e.g. `"a1584f"`) used for the placeholder blob until real art exists. |
+| `sprite_height` | Optional number: on-screen height of the sprite in pixels (default 96). |
 | `idle_dialogue` | Array of throwaway lines shown outside of milestone events. |
+
+## gifts.json (optional)
+
+Gift tastes come from the character's `personality`, so this file is **not
+required**. Use it for two things: personal quirks, and the character's own
+voice.
+
+```json
+{
+	"loves": ["wildflowers"],
+	"hates": ["old_coin"],
+	"reactions": {
+		"love": "Oh! {item}! Thank you!",
+		"like": "Aw, the {item}. That's sweet.",
+		"neutral": "Oh. The {item}. Thanks, I guess.",
+		"dislike": "The {item}? Um. No.",
+		"hate": "{item}?! Get that away from me!"
+	},
+	"rude_reactions": [
+		"Wow. Rude.",
+		"Was that necessary?"
+	]
+}
+```
+
+- `loves` / `likes` / `dislikes` / `hates` override the personality for those
+  specific items. Leave out any you don't need.
+- `reactions` and `rude_reactions` are the character's own lines. Anything
+  missing falls back to the reactions of their first personality trait.
+- `{item}` is replaced with the item's name. Item names can be plural
+  ("Wildflowers"), so write "the {item}" or just "{item}" rather than "a {item}".
+- (Older files may also hold `"personality"` here instead of in `character.json`. Either works.)
 
 ## Events
 

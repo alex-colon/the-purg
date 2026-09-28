@@ -1,0 +1,18 @@
+{
+	"type": "heart",
+	"level": 8,
+	"dialogue": [
+		{
+			"speaker": "Brother Tallow",
+			"text": "[He writes for a long time.] 'I took my vow of silence so I would never have to confess something.'"
+		},
+		{
+			"speaker": "Brother Tallow",
+			"text": "[Another slate.] 'The abbey's donation box was never as full as it should have been. I was the reason.'"
+		},
+		{
+			"speaker": "Brother Tallow",
+			"text": "[He looks at you.] 'I have told no one this. I find I do not mind that it is you.'"
+		}
+	]
+}

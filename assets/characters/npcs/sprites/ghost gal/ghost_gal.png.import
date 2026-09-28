@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dytwehhrtu0rx"
-path="res://.godot/imported/morgan-sprite.png-1021a08567c6f67a0bbc2bb9687bc429.ctex"
+uid="uid://bb6ykqu4adwey"
+path="res://.godot/imported/ghost_gal.png-17c86fcc52965c144675759ab8967248.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/characters/npcs/sprites/morgan-sprite.png"
-dest_files=["res://.godot/imported/morgan-sprite.png-1021a08567c6f67a0bbc2bb9687bc429.ctex"]
+source_file="res://assets/characters/npcs/sprites/ghost gal/ghost_gal.png"
+dest_files=["res://.godot/imported/ghost_gal.png-17c86fcc52965c144675759ab8967248.ctex"]
 
 [params]
 

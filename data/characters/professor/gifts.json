@@ -1,0 +1,16 @@
+{
+	"hates": [
+		"bone_dice"
+	],
+	"reactions": {
+		"love": "{item}! And in such fine condition. Well, mostly. Splendid. Simply splendid.",
+		"like": "How thoughtful. Thank you for the {item}.",
+		"neutral": "Ah. The {item}. I'm sure I'll find a use for it.",
+		"dislike": "Hm. The {item}. I'd rather you hadn't, but I appreciate the thought.",
+		"hate": "{item}?! Take it away at once. I will pretend this never happened."
+	},
+	"rude_reactions": [
+		"That is quite enough. I will be noting this in your file.",
+		"I taught four thousand children. None were as ill-mannered as you."
+	]
+}

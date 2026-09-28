@@ -1,0 +1,18 @@
+{
+	"id": "innkeeper",
+	"name": "Dolores Marrow",
+	"alignment": "sinner",
+	"status": "pool",
+	"personality": [
+		"wrathful",
+		"greedy"
+	],
+	"description": "The town's innkeeper, a gruff woman who watered down every drink she poured for thirty years and regrets none of it. She respects people who stand up to her far more than people who flatter her.",
+	"home_building": "pub",
+	"placeholder_color": "a1584f",
+	"idle_dialogue": [
+		"You buying or just breathing? The breathing's free but I'm watching you.",
+		"Whatever the ghost girl told you about me, it's true. And I stand by it.",
+		"Tab's due at the end of eternity. I accept payment in advance."
+	]
+}

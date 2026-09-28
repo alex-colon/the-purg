@@ -2,9 +2,17 @@
 	"id": "silent_monk",
 	"name": "Brother Tallow",
 	"alignment": "sinner",
-	"status": "pool",
-	"description": "A monk who took a vow of silence in life and, infuriatingly, has kept it in death. No one is sure yet what put him on the sinner track.",
+	"status": "active",
+	"personality": [
+		"devout",
+		"greedy"
+	],
+	"description": "A monk who took a vow of silence in life and, infuriatingly, has kept it in death. He took the vow to avoid confessing that he skimmed the abbey's donation box for years.",
+	"home_building": "office",
+	"placeholder_color": "8d7b68",
 	"idle_dialogue": [
-		"..."
+		"[He holds up a slate that reads: 'Lovely day.' It is always the same day.]",
+		"[He bows slightly and returns to studying the fountain.]",
+		"[He taps his slate, then points at the sky, then shrugs.]"
 	]
 }

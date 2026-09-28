@@ -1,0 +1,18 @@
+{
+	"type": "heart",
+	"level": 8,
+	"dialogue": [
+		{
+			"speaker": "Dolores Marrow",
+			"text": "I watered down every drink I ever poured. Every one. Thirty years."
+		},
+		{
+			"speaker": "Dolores Marrow",
+			"text": "Nobody ever asked me why. I'd have told them: I was scared the money would run out. It always felt like it would."
+		},
+		{
+			"speaker": "Dolores Marrow",
+			"text": "Don't look at me like that. I don't need pity. ...But thanks for not walking out."
+		}
+	]
+}

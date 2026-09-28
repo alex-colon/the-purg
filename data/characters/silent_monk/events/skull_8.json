@@ -1,0 +1,14 @@
+{
+	"type": "skull",
+	"level": 8,
+	"dialogue": [
+		{
+			"speaker": "Brother Tallow",
+			"text": "[He writes hard enough that the chalk snaps.] 'You want a sinner? Look closer to home.'"
+		},
+		{
+			"speaker": "Brother Tallow",
+			"text": "[He turns the slate face-down. He is finished with you for today.]"
+		}
+	]
+}

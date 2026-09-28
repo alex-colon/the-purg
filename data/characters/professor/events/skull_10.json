@@ -1,0 +1,15 @@
+{
+	"type": "skull",
+	"level": 10,
+	"departs": true,
+	"dialogue": [
+		{
+			"speaker": "Ambrose Quill",
+			"text": "My case has been called. Heaven, apparently. I would say I'm sorry to leave you, but I would be lying, and I do not lie."
+		},
+		{
+			"speaker": "Ambrose Quill",
+			"text": "I do hope you'll reconsider your ways. I wrote a note in your file. In pencil, so it's easy to correct."
+		}
+	]
+}

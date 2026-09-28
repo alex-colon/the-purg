@@ -1,0 +1,18 @@
+{
+	"type": "skull",
+	"level": 8,
+	"dialogue": [
+		{
+			"speaker": "Dolores Marrow",
+			"text": "You know what I like about you? You never pretend. That's rare down here. Everyone's busy auditioning for heaven."
+		},
+		{
+			"speaker": "Dolores Marrow",
+			"text": "I'll tell you a secret: I don't want out. I want a decent bar and someone to argue with. You qualify."
+		},
+		{
+			"speaker": "Dolores Marrow",
+			"text": "Don't let it go to your head. The tab's still due."
+		}
+	]
+}

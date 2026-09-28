@@ -1,0 +1,159 @@
+{
+	"items": [
+		{
+			"id": "wildflowers",
+			"name": "Wildflowers",
+			"description": "A crooked bunch picked from the edge of town.",
+			"tags": [
+				"gentle",
+				"natural",
+				"beautiful"
+			]
+		},
+		{
+			"id": "sweet_bun",
+			"name": "Sweet Bun",
+			"description": "Still warm. Nobody knows who baked it.",
+			"tags": [
+				"sweet",
+				"gentle"
+			]
+		},
+		{
+			"id": "old_coin",
+			"name": "Tarnished Coin",
+			"description": "Currency from somewhere that no longer exists.",
+			"tags": [
+				"luxury",
+				"sentimental"
+			]
+		},
+		{
+			"id": "prayer_beads",
+			"name": "Prayer Beads",
+			"description": "Worn smooth by a lot of worrying.",
+			"tags": [
+				"holy",
+				"sentimental"
+			]
+		},
+		{
+			"id": "whiskey",
+			"name": "Cheap Whiskey",
+			"description": "It burns. That's the whole review.",
+			"tags": [
+				"vice",
+				"risky"
+			]
+		},
+		{
+			"id": "black_candle",
+			"name": "Black Candle",
+			"description": "It never seems to burn down.",
+			"tags": [
+				"dark",
+				"beautiful"
+			]
+		},
+		{
+			"id": "paperback",
+			"name": "Paperback Book",
+			"description": "Dog-eared. Someone loved this.",
+			"tags": [
+				"intellectual",
+				"sentimental"
+			]
+		},
+		{
+			"id": "bone_dice",
+			"name": "Bone Dice",
+			"description": "They always seem to land on the same number.",
+			"tags": [
+				"risky",
+				"vice"
+			]
+		},
+		{
+			"id": "rusty_knife",
+			"name": "Rusty Knife",
+			"description": "Nobody remembers whose it was. Everyone remembers what it did.",
+			"tags": [
+				"violent",
+				"dark"
+			]
+		},
+		{
+			"id": "fine_perfume",
+			"name": "Fine Perfume",
+			"description": "A little bottle that smells like money.",
+			"tags": [
+				"luxury",
+				"beautiful"
+			]
+		},
+		{
+			"id": "holy_water",
+			"name": "Vial of Holy Water",
+			"description": "Lukewarm, but blessed.",
+			"tags": [
+				"holy",
+				"gentle"
+			]
+		},
+		{
+			"id": "old_photograph",
+			"name": "Old Photograph",
+			"description": "A stranger's family, smiling.",
+			"tags": [
+				"sentimental",
+				"gentle"
+			]
+		},
+		{
+			"id": "wooden_toy",
+			"name": "Wooden Toy",
+			"description": "A little painted horse with a chipped ear.",
+			"tags": [
+				"playful",
+				"natural"
+			]
+		},
+		{
+			"id": "chocolates",
+			"name": "Box of Chocolates",
+			"description": "One is missing. You're not sure who took it.",
+			"tags": [
+				"sweet",
+				"luxury"
+			]
+		},
+		{
+			"id": "sketchbook",
+			"name": "Blank Sketchbook",
+			"description": "Crisp pages, waiting.",
+			"tags": [
+				"beautiful",
+				"intellectual"
+			]
+		},
+		{
+			"id": "herbal_tea",
+			"name": "Herbal Tea",
+			"description": "Smells like a garden you've never been to.",
+			"tags": [
+				"gentle",
+				"natural"
+			]
+		},
+		{
+			"id": "mystery_powder",
+			"name": "Mystery Powder",
+			"description": "Sold by a man who wouldn't give his name.",
+			"tags": [
+				"vice",
+				"risky",
+				"dark"
+			]
+		}
+	]
+}

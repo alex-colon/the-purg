@@ -1,0 +1,412 @@
+{
+	"tags": [
+		"gentle",
+		"natural",
+		"sweet",
+		"holy",
+		"intellectual",
+		"beautiful",
+		"sentimental",
+		"playful",
+		"luxury",
+		"vice",
+		"dark",
+		"violent",
+		"risky"
+	],
+	"traits": [
+		{
+			"id": "compassionate",
+			"name": "Compassionate",
+			"kind": "good",
+			"description": "Soft-hearted; can't stand cruelty.",
+			"loves": [
+				"gentle",
+				"sweet"
+			],
+			"dislikes": [
+				"violent",
+				"vice"
+			],
+			"reactions": {
+				"love": "Oh, {item}! That's so thoughtful. You've made my whole day.",
+				"like": "How kind of you. Thank you for the {item}.",
+				"neutral": "That's very kind of you. Thank you for the {item}.",
+				"dislike": "Oh... {item}. I'd rather not keep it, but I know you meant well.",
+				"hate": "{item}? Please, take that away. It upsets me."
+			},
+			"rude_reactions": [
+				"That hurt. Why would you say something like that?",
+				"I don't understand why you'd be cruel to me."
+			]
+		},
+		{
+			"id": "devout",
+			"name": "Devout",
+			"kind": "good",
+			"description": "Faith comes first.",
+			"loves": [
+				"holy",
+				"gentle"
+			],
+			"dislikes": [
+				"dark",
+				"vice"
+			],
+			"reactions": {
+				"love": "{item}! Truly a blessing. Thank you, friend.",
+				"like": "Bless you for the {item}.",
+				"neutral": "Thank you for the {item}. I'll find a use for it.",
+				"dislike": "I'd rather not have the {item}. But I thank you for the thought.",
+				"hate": "{item}?! Take it away. I want no part of that."
+			},
+			"rude_reactions": [
+				"Unkindness is its own punishment, you know.",
+				"I forgive you. That doesn't mean it didn't sting."
+			]
+		},
+		{
+			"id": "scholarly",
+			"name": "Scholarly",
+			"kind": "good",
+			"description": "Curious and bookish.",
+			"loves": [
+				"intellectual",
+				"beautiful"
+			],
+			"dislikes": [
+				"violent",
+				"risky"
+			],
+			"reactions": {
+				"love": "{item}! Fascinating. I shall study it closely. Thank you.",
+				"like": "Interesting. Thank you for the {item}.",
+				"neutral": "Hm. The {item}. I'm sure I'll find some use for it.",
+				"dislike": "The {item}? I can't say that's to my taste.",
+				"hate": "{item}?! That is entirely unsuitable. Please remove it."
+			},
+			"rude_reactions": [
+				"That was a remarkably unproductive thing to say.",
+				"I'll file that under 'forgivable'. Barely."
+			]
+		},
+		{
+			"id": "humble",
+			"name": "Humble",
+			"kind": "good",
+			"description": "Simple tastes, no fuss.",
+			"loves": [
+				"natural",
+				"sentimental"
+			],
+			"dislikes": [
+				"luxury"
+			],
+			"reactions": {
+				"love": "Oh, {item}. That's perfect. Simple things are the best things.",
+				"like": "Thank you for the {item}. That's more than I need.",
+				"neutral": "Thank you for the {item}. That's kind.",
+				"dislike": "The {item}? That's a bit much for someone like me.",
+				"hate": "No, no. I couldn't accept {item}. Please, take it back."
+			},
+			"rude_reactions": [
+				"I'll let that go. I've heard worse.",
+				"That's a shame. I thought we were getting along."
+			]
+		},
+		{
+			"id": "cheerful",
+			"name": "Cheerful",
+			"kind": "good",
+			"description": "Can't help being upbeat.",
+			"loves": [
+				"playful",
+				"sweet"
+			],
+			"dislikes": [
+				"dark"
+			],
+			"reactions": {
+				"love": "{item}?! You're the best! Thank you, thank you!",
+				"like": "Ooh, {item}! Thanks!",
+				"neutral": "The {item}! ...Thanks?",
+				"dislike": "Hmm, {item}. Not really my thing, but thanks!",
+				"hate": "Ugh, {item}? Way too gloomy for me. No thanks!"
+			},
+			"rude_reactions": [
+				"Whoa, where did that come from? Bad day?",
+				"Wow. Okay. I'm going to pretend you didn't say that."
+			]
+		},
+		{
+			"id": "artistic",
+			"name": "Artistic",
+			"kind": "good",
+			"description": "Sees beauty in everything.",
+			"loves": [
+				"beautiful",
+				"natural"
+			],
+			"dislikes": [
+				"violent"
+			],
+			"reactions": {
+				"love": "{item}! Look at it, it's beautiful. Thank you.",
+				"like": "What a lovely gift. Thank you for the {item}.",
+				"neutral": "The {item}. I may find some inspiration in it yet.",
+				"dislike": "The {item}? It doesn't speak to me, I'm afraid.",
+				"hate": "{item}? It's dreadful. Please take it away."
+			},
+			"rude_reactions": [
+				"You have no soul for anything but sneering.",
+				"That was ugly. I'll try to forget it."
+			]
+		},
+		{
+			"id": "loyal",
+			"name": "Loyal",
+			"kind": "good",
+			"description": "Attached to people and keepsakes.",
+			"loves": [
+				"sentimental",
+				"holy"
+			],
+			"dislikes": [
+				"risky"
+			],
+			"reactions": {
+				"love": "{item}? I'll keep this forever. Thank you.",
+				"like": "Thank you for the {item}. I'll take good care of it.",
+				"neutral": "Thank you for the {item}. That's kind.",
+				"dislike": "The {item}? ...Thank you for thinking of me, anyway.",
+				"hate": "I can't take the {item}. I'm sorry."
+			},
+			"rude_reactions": [
+				"I thought we were friends. That stung.",
+				"I won't hold it against you. But I won't forget it either."
+			]
+		},
+		{
+			"id": "adventurous",
+			"name": "Adventurous",
+			"kind": "good",
+			"description": "Restless; travels light.",
+			"loves": [
+				"risky",
+				"natural"
+			],
+			"dislikes": [
+				"sentimental"
+			],
+			"reactions": {
+				"love": "{item}! Now that's the kind of thing I like. Thanks!",
+				"like": "Oh, {item}! That'll come in handy.",
+				"neutral": "The {item}. I can carry it, I guess.",
+				"dislike": "The {item}? I travel light, friend. No thanks.",
+				"hate": "{item}? That would just weigh me down. Nope."
+			},
+			"rude_reactions": [
+				"Ha! Feisty. I like that, I think.",
+				"Careful. I've been in worse fights than this one."
+			]
+		},
+		{
+			"id": "vain",
+			"name": "Vain",
+			"kind": "flawed",
+			"description": "Image is everything.",
+			"loves": [
+				"beautiful",
+				"luxury"
+			],
+			"dislikes": [
+				"sentimental"
+			],
+			"reactions": {
+				"love": "{item}! Finally, someone who knows how to treat me.",
+				"like": "Oh, {item}. That suits me. Thank you.",
+				"neutral": "The {item}. Fine. I suppose it will do.",
+				"dislike": "The {item}? That's not quite my style, darling.",
+				"hate": "{item}?! Do you have any idea how that would look on me?"
+			},
+			"rude_reactions": [
+				"How dare you. Do you know who you're talking to?",
+				"Please. You're jealous. It's obvious."
+			]
+		},
+		{
+			"id": "greedy",
+			"name": "Greedy",
+			"kind": "flawed",
+			"description": "Always counting.",
+			"loves": [
+				"luxury",
+				"risky"
+			],
+			"dislikes": [
+				"sentimental",
+				"holy"
+			],
+			"reactions": {
+				"love": "{item}! Mine now. All mine. Thank you very much.",
+				"like": "The {item}? Well, well. That's worth something.",
+				"neutral": "The {item}. I'll see what I can get for it.",
+				"dislike": "The {item}? It's not worth my time.",
+				"hate": "The {item}? That's worthless. Are you trying to insult me?"
+			},
+			"rude_reactions": [
+				"That'll cost you. Everything does.",
+				"Rude. And I don't do free insults. You owe me for that one."
+			]
+		},
+		{
+			"id": "cruel",
+			"name": "Cruel",
+			"kind": "flawed",
+			"description": "Enjoys other people's discomfort.",
+			"loves": [
+				"violent",
+				"dark"
+			],
+			"dislikes": [
+				"gentle",
+				"holy"
+			],
+			"reactions": {
+				"love": "{item}! Oh, you do know me. I'll enjoy this.",
+				"like": "The {item}. Hm. I can think of some uses for it.",
+				"neutral": "The {item}. Boring, but I'll take it.",
+				"dislike": "The {item}? Please. That's far too soft for me.",
+				"hate": "{item}? Disgusting. Keep your sweetness to yourself."
+			},
+			"rude_reactions": [
+				"Oh, that's adorable. Try harder.",
+				"Ha! Was that meant to hurt? I've had worse from children."
+			]
+		},
+		{
+			"id": "gluttonous",
+			"name": "Gluttonous",
+			"kind": "flawed",
+			"description": "Can't say no.",
+			"loves": [
+				"sweet",
+				"vice"
+			],
+			"dislikes": [
+				"intellectual"
+			],
+			"reactions": {
+				"love": "{item}! I'll have all of it. Every last bit. Thank you!",
+				"like": "Ooh, {item}. Don't mind if I do.",
+				"neutral": "The {item}. Sure, I'll take it. I'll take anything.",
+				"dislike": "The {item}? That's not going to satisfy me at all.",
+				"hate": "The {item}? Don't insult my appetite. Take it back."
+			},
+			"rude_reactions": [
+				"Insults go down easier with a snack, you know.",
+				"Rude. Now I'm hungry and annoyed."
+			]
+		},
+		{
+			"id": "reckless",
+			"name": "Reckless",
+			"kind": "flawed",
+			"description": "Lives for the thrill.",
+			"loves": [
+				"risky",
+				"vice"
+			],
+			"dislikes": [
+				"intellectual",
+				"natural"
+			],
+			"reactions": {
+				"love": "{item}! Now we're talking. Let's see what happens!",
+				"like": "Ha, {item}! I'm in.",
+				"neutral": "The {item}. Sure. Why not.",
+				"dislike": "The {item}? Boring. Come on, live a little.",
+				"hate": "The {item}? That's the most boring thing anyone's ever handed me."
+			},
+			"rude_reactions": [
+				"Ha! Do it again. I dare you.",
+				"Bold. I respect bold. Idiotic, but bold."
+			]
+		},
+		{
+			"id": "bitter",
+			"name": "Bitter",
+			"kind": "flawed",
+			"description": "Resents everyone else's luck.",
+			"loves": [
+				"dark",
+				"sentimental"
+			],
+			"dislikes": [
+				"playful",
+				"beautiful"
+			],
+			"reactions": {
+				"love": "{item}. ...Huh. Someone actually gets me. Thanks.",
+				"like": "The {item}. Fine. Better than nothing.",
+				"neutral": "The {item}. Of course. Nothing special, like everything else.",
+				"dislike": "The {item}? Rub it in, why don't you.",
+				"hate": "The {item}? Are you mocking me? Get out of my face."
+			},
+			"rude_reactions": [
+				"Join the line. Everyone's got something to say about me.",
+				"Wonderful. One more person who thinks they're better than me."
+			]
+		},
+		{
+			"id": "scheming",
+			"name": "Scheming",
+			"kind": "flawed",
+			"description": "Always working an angle.",
+			"loves": [
+				"intellectual",
+				"dark"
+			],
+			"dislikes": [
+				"holy",
+				"sentimental"
+			],
+			"reactions": {
+				"love": "{item}. How very useful. I do appreciate a well-chosen gift.",
+				"like": "The {item}. That could come in handy. Thank you.",
+				"neutral": "The {item}. Interesting choice. What do you want in return?",
+				"dislike": "The {item}? That does nothing for me.",
+				"hate": "The {item}? Is this a trick? I don't like being played."
+			},
+			"rude_reactions": [
+				"Careful. I remember everything, and I collect debts.",
+				"How interesting. I'll remember that when it matters."
+			]
+		},
+		{
+			"id": "wrathful",
+			"name": "Wrathful",
+			"kind": "flawed",
+			"description": "Short fuse.",
+			"loves": [
+				"violent",
+				"vice"
+			],
+			"dislikes": [
+				"gentle",
+				"playful"
+			],
+			"reactions": {
+				"love": "{item}! Finally, something that gets me. Good.",
+				"like": "Hm. The {item}. Not bad.",
+				"neutral": "The {item}. Whatever. Fine.",
+				"dislike": "The {item}? Are you kidding me?",
+				"hate": "The {item}?! Get that out of my face before I lose it!"
+			},
+			"rude_reactions": [
+				"You want to say that again? Go ahead. Say it again.",
+				"You've got a nerve. I'd watch it."
+			]
+		}
+	]
+}

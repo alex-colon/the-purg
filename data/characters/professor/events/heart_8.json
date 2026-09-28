@@ -1,0 +1,18 @@
+{
+	"type": "heart",
+	"level": 8,
+	"dialogue": [
+		{
+			"speaker": "Ambrose Quill",
+			"text": "Between us, I've been alphabetizing the case files in the town office. Mine is filed under 'Q, pending.' Eleven years."
+		},
+		{
+			"speaker": "Ambrose Quill",
+			"text": "I suspect it's a clerical error. I like to think it means someone up there forgot me on purpose, and is saving my seat."
+		},
+		{
+			"speaker": "Ambrose Quill",
+			"text": "You've been kind to an old man who talks too much. I won't forget it."
+		}
+	]
+}
