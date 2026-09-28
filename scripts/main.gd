@@ -10,14 +10,34 @@ const TOWN_SIZE := Vector2(1100, 640)
 const WALL_THICKNESS := 32.0
 const DOOR_WIDTH := 100.0
 
+const NPC_SCENE := preload("res://scenes/npc.tscn")
+
+# Fixed placeholder spots for now -- roughly in front of the "home" and
+# "shop" buildings drawn in draw_town(). Once real building/spawn-point
+# data exists per character, replace this with something data-driven.
+const NPC_SPAWN_POSITIONS := [
+	Vector2(215, 260),
+	Vector2(885, 260),
+]
+
 @onready var player: CharacterBody2D = $Player
 
 var current_map: Map = Map.ROOM
 var walls: Node2D
+var npcs: Node2D
 
 
 func _ready() -> void:
+	Roster.character_departed.connect(_on_roster_changed)
+	Roster.character_arrived.connect(_on_roster_changed)
 	build_room()
+
+
+func _on_roster_changed(_character_id: String) -> void:
+	# A case was called and/or a new character cycled in. If we're
+	# currently in town, refresh who's standing around.
+	if current_map == Map.TOWN:
+		spawn_npcs()
 
 
 func _process(_delta: float) -> void:
@@ -39,6 +59,7 @@ func enter_room() -> void:
 	current_map = Map.ROOM
 	player.position = Vector2(ROOM_SIZE.x / 2, ROOM_SIZE.y - 70)
 	build_room()
+	reset_npcs()
 	queue_redraw()
 
 
@@ -93,6 +114,29 @@ func build_town() -> void:
 	)
 
 	create_bottom_wall_with_door(TOWN_SIZE)
+	spawn_npcs()
+
+
+func reset_npcs() -> void:
+	if is_instance_valid(npcs):
+		npcs.free()
+
+	npcs = Node2D.new()
+	npcs.name = "NPCs"
+	add_child(npcs)
+
+
+func spawn_npcs() -> void:
+	reset_npcs()
+
+	for i in Roster.active_ids.size():
+		if i >= NPC_SPAWN_POSITIONS.size():
+			break # only a couple of placeholder spots exist for now
+
+		var npc := NPC_SCENE.instantiate()
+		npc.character_id = Roster.active_ids[i]
+		npc.position = NPC_SPAWN_POSITIONS[i]
+		npcs.add_child(npc)
 
 
 func create_bottom_wall_with_door(map_size: Vector2) -> void:

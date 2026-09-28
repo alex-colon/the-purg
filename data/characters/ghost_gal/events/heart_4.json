@@ -1,0 +1,8 @@
+{
+	"type": "heart",
+	"level": 4,
+	"dialogue": [
+		{ "speaker": "Wisp", "text": "You keep coming back to talk to me. I like that." },
+		{ "speaker": "Wisp", "text": "Most people down here are still mourning their own funerals. You seem... fine, actually." }
+	]
+}

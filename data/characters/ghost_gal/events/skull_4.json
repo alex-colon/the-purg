@@ -1,0 +1,8 @@
+{
+	"type": "skull",
+	"level": 4,
+	"dialogue": [
+		{ "speaker": "Wisp", "text": "Wow. Okay. I died a hero and this is the treatment I get?" },
+		{ "speaker": "Wisp", "text": "I'm starting to think you're the reason this town needs a complaints office." }
+	]
+}

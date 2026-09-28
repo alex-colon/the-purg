@@ -1,0 +1,9 @@
+{
+	"type": "heart",
+	"level": 10,
+	"departs": true,
+	"dialogue": [
+		{ "speaker": "Wisp", "text": "They called my case. Can you believe it? Eleven years and it's finally my turn." },
+		{ "speaker": "Wisp", "text": "Thank you for being one of the good ones. I'll try to put in a word for you up there, no promises." }
+	]
+}

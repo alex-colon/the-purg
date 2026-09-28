@@ -1,0 +1,9 @@
+{
+	"type": "skull",
+	"level": 10,
+	"departs": true,
+	"dialogue": [
+		{ "speaker": "Wisp", "text": "They called my case. Given how you've treated me, I almost don't want to know where I'm headed." },
+		{ "speaker": "Wisp", "text": "Goodbye. I won't pretend I'll miss you." }
+	]
+}

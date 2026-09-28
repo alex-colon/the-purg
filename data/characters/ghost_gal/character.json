@@ -1,0 +1,16 @@
+{
+	"id": "ghost_gal",
+	"name": "Wisp",
+	"alignment": "saint",
+	"status": "active",
+	"description": "A cheerful ghost who drowned saving a child from a river. She's certain she's heaven-bound and treats her stay in purgatory like an extended vacation.",
+	"home_building": "ghost_gal_home",
+	"portrait": "res://assets/characters/npcs/townies/ghost_gal_portrait.png",
+	"sprite": "res://assets/characters/npcs/townies/ghost_gal_sprite.png",
+	"theme_music": "assets/characters/npcs/townies/ghost_gal/theme.ogg",
+	"idle_dialogue": [
+		"The weather's always perfect here. I miss rain, honestly.",
+		"Have you met the innkeeper yet? Absolute menace.",
+		"I've been dead eleven years and I still haven't gotten bored. Small miracles."
+	]
+}

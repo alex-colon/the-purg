@@ -1,0 +1,10 @@
+{
+	"id": "silent_monk",
+	"name": "Brother Tallow",
+	"alignment": "sinner",
+	"status": "pool",
+	"description": "A monk who took a vow of silence in life and, infuriatingly, has kept it in death. No one is sure yet what put him on the sinner track.",
+	"idle_dialogue": [
+		"..."
+	]
+}
